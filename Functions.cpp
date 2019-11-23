@@ -50,7 +50,6 @@ std::vector<std::unique_ptr<Smalltalk>> getPeople(int numBrit,
 	{
 		std::unique_ptr<Watch> w(new Watch());
 		people.at(i).get()->giveWatch(w);
-		//people.size() - 1 - i
 	}
 
 	return people;

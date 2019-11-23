@@ -21,20 +21,21 @@ std::string Smalltalk::saySomething()
 
 std::string Smalltalk::getTime()
 {
-	if (pWatch == 0) return I_DO_NOT_HAVE_A_WATCH;
+	if (pWatch.get() == 0) return I_DO_NOT_HAVE_A_WATCH;
 	return pWatch.get()->getTime();
 }
 
 std::unique_ptr<Watch> Smalltalk::takeWatch()
 {
-	if (pWatch != 0) return std::move(pWatch);
-	return std::unique_ptr<Watch>(nullptr);
+	if (pWatch.get() != 0) return std::move(pWatch);
+	std::unique_ptr<Watch> nullWatch;
+	return nullWatch;
 }
 
 bool Smalltalk::giveWatch(std::unique_ptr<Watch> &pWatch)
 {
-	if (pWatch != 0) return false;
+	if (this->pWatch.get() != 0) return false;
 
-	pWatch = std::move(pWatch);
+	this->pWatch = std::move(pWatch);
 	return true;
 }
